@@ -1,0 +1,2 @@
+class UsersProgram < ApplicationRecord
+end
