@@ -8,6 +8,16 @@
 
 require 'bcrypt'
 
+# Removing all existing data
+User.destroy_all
+Lift.destroy_all
+Weight.destroy_all
+Workout.destroy_all
+WorkoutsLift.destroy_all
+Program.destroy_all
+ProgramsWorkout.destroy_all
+UsersProgram.destroy_all
+
 puts "🌱 Seeding..."
 
 # Creating two users
