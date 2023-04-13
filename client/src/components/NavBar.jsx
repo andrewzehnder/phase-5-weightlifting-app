@@ -12,12 +12,14 @@ const NavBar = () => {
   const navigate = useNavigate(0);
 
   function handleLogout() {
-    // fetch("/logout", { method: "DELETE" }).then((resp) => {
-    //   if (resp.ok) {
-    //     navigate ('/login');
-    //     setUser(null);
-    //   }
-    // });
+    fetch("/logout", { 
+      method: "DELETE" 
+    }).then((resp) => {
+      if (resp.ok) {
+        navigate ('/login');
+        setUser(null);
+      }
+    });
   }
 
   return (
