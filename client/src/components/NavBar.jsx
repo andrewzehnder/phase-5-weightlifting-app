@@ -1,10 +1,25 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
+import { UserContext } from "../context/user";
 
 const NavBar = () => {
+  const { user, setUser } = useContext(UserContext);
+
+  const navigate = useNavigate(0);
+
+  function handleLogout() {
+    // fetch("/logout", { method: "DELETE" }).then((resp) => {
+    //   if (resp.ok) {
+    //     navigate ('/login');
+    //     setUser(null);
+    //   }
+    // });
+  }
+
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
@@ -17,7 +32,10 @@ const NavBar = () => {
             <Nav.Link href="/programs">Programs</Nav.Link>
           </Nav>
           <Nav>
-            <Button variant="outline-light" href="/login" >Login</Button>
+            { user ? 
+                <Button variant="outline-light" onClick={handleLogout} >Logout</Button> : 
+                <Button variant="outline-light" href="/login">Login</Button>
+            }
           </Nav>
         </Navbar.Collapse>
       </Container>

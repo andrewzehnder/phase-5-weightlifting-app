@@ -7,20 +7,23 @@ import Lifts from './components/Lifts';
 import Workouts from './components/Workouts';
 import Programs from './components/Programs';
 import Login from './components/Login';
+import { UserProvider } from "./context/user";
 
 
 
 function App() {
   return (
     <Router>
-      <NavBar />
-      <Routes>
-        <Route path="/" element={<Home /> } />
-        <Route path="/lifts" element={<Lifts /> } />
-        <Route path="/workouts" element={<Workouts /> } />
-        <Route path="/programs" element={<Programs /> } />
-        <Route path="/login" element={<Login /> } />
-      </Routes>
+      <UserProvider>
+        <NavBar />
+        <Routes>
+          <Route path="/" element={<Home /> } />
+          <Route path="/lifts" element={<Lifts /> } />
+          <Route path="/workouts" element={<Workouts /> } />
+          <Route path="/programs" element={<Programs /> } />
+          <Route path="/login" element={<Login /> } />
+        </Routes>
+      </UserProvider>
     </Router>
   );
 }
