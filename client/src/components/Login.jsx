@@ -11,7 +11,6 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [loginErrors, setLoginErrors] = useState([]);
   const [signupErrors, setSignupErrors] = useState([]);
-
   const [newUser, setNewUser] = useState({
     name: "",
     username: "",
@@ -19,7 +18,6 @@ const Login = () => {
     password_confirmation: ""
   })
   
-
   const navigate = useNavigate(0);
 
   const handleSessionSubmit = e => {
@@ -71,6 +69,7 @@ const Login = () => {
   return (
     <div>
         <UserProvider>
+            {/* try to use users now that I'm using context instead of showloginform */}
             {showLoginForm ? (
             <LoginForm setShowLoginForm={ setShowLoginForm } setUsername={ setUsername } setPassword= { setPassword } loginErrors= { loginErrors } handleSessionSubmit= { handleSessionSubmit } username={ username } password= { password }/>
             ) : (
