@@ -15,6 +15,7 @@ const Workouts = () => {
       setWorkoutsList(workouts);
     })
 }, []);
+
   return (
     <Form>
     <Form.Group>

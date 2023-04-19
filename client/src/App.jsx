@@ -10,6 +10,7 @@ import Programs from './components/Programs';
 import Login from './components/Login';
 import LiftsAdd from './components/LiftsAdd';
 import WorkoutsAdd from './components/WorkoutsAdd';
+import ProgramsAdd from './components/ProgramsAdd';
 
 
 
@@ -26,6 +27,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/addlift" element={<LiftsAdd />} />
           <Route path="/addworkout" element={<WorkoutsAdd />} />
+          <Route path="/addprogram" element={<ProgramsAdd />} />
         </Routes>
       </UserProvider>
     </Router>

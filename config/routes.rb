@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   delete "/logout", to: "sessions#destroy"
   get "/lifts_all", to: "lifts#index"
   get "/workouts_all", to: "workouts#index"
+  get "/programs_all", to: "programs#index"
 
 
   # Routing logic: fallback requests for React Router.

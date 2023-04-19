@@ -1,7 +1,7 @@
 import React from 'react'
 import Card from 'react-bootstrap/Card';
 
-const WorkoutsCard = ( {workout }) => {
+const WorkoutsCard = ({ workout }) => {
   return (
     <Card style={{ width: '18rem', marginBottom: '10px' }}>
       <Card.Body>
