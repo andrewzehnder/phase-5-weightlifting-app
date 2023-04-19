@@ -9,7 +9,7 @@ const Lifts = () => {
   const [liftsList, setLiftsList] = useState([]);
 
   useEffect(() => {
-    fetch("/lifts")
+    fetch("/lifts_all")
     .then((resp) => resp.json())
     .then((lifts) => {
         setLiftsList(lifts);
