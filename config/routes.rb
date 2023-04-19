@@ -6,7 +6,6 @@ Rails.application.routes.draw do
   resources :programs
   resources :workouts
   resources :weights
-  resources :lifts
   
   get "/users", to: "users#index"
   get "/me", to: "users#show"
