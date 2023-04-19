@@ -1,12 +1,5 @@
 Rails.application.routes.draw do
   
-  resources :users_programs
-  resources :programs_workouts
-  resources :workouts_lifts
-  resources :programs
-  resources :workouts
-  resources :weights
-  
   get "/users", to: "users#index"
   get "/me", to: "users#show"
   post "/user/create", to: "users#create"
