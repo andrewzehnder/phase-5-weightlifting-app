@@ -8,7 +8,8 @@ import Lifts from './components/Lifts';
 import Workouts from './components/Workouts';
 import Programs from './components/Programs';
 import Login from './components/Login';
-import AddLift from './components/AddLift';
+import LiftsAdd from './components/LiftsAdd';
+import WorkoutsAdd from './components/WorkoutsAdd';
 
 
 
@@ -18,12 +19,13 @@ function App() {
       <UserProvider>
         <NavBar />
         <Routes>
-          <Route path="/" element={<Home /> } />
-          <Route path="/lifts" element={<Lifts /> } />
-          <Route path="/workouts" element={<Workouts /> } />
-          <Route path="/programs" element={<Programs /> } />
-          <Route path="/login" element={<Login /> } />
-          <Route path="/addlift" element={<AddLift /> } />
+          <Route path="/" element={<Home />} />
+          <Route path="/lifts" element={<Lifts />} />
+          <Route path="/workouts" element={<Workouts />} />
+          <Route path="/programs" element={<Programs />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/addlift" element={<LiftsAdd />} />
+          <Route path="/addworkout" element={<WorkoutsAdd />} />
         </Routes>
       </UserProvider>
     </Router>
