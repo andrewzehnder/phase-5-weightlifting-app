@@ -20,7 +20,7 @@ const LoginForm = ({ setShowLoginForm, setUsername, setPassword, loginErrors, ha
       : null
     }
 
-    <Form>
+    <Form onSubmit={ handleSessionSubmit }>
        <Form.Group style={{ width: '33.33%', padding: '10px' }}>
        <h2>Login with an Existing Account</h2>
        <div>
@@ -46,15 +46,16 @@ const LoginForm = ({ setShowLoginForm, setUsername, setPassword, loginErrors, ha
                 />
        </div>
 
-       <Button input type="submit" variant="light" onClick={ handleSessionSubmit } style={{ marginBottom: '20px' }} >Login</Button>
-
-        <h4>Don't have an account? Sign up here</h4>
-        <div>
-        <Button type="submit" variant="light" onClick={ handleSignUp }>Signup</Button>
-        </div>
+       <Button type="submit" variant="light" style={{ marginBottom: '20px' }} >Login</Button>
 
         </Form.Group>
     </Form>
+
+    <h4>Don't have an account? Sign up here</h4>
+        <div>
+        <Button type="submit" variant="light" onClick={ handleSignUp }>Signup</Button>
+        </div>
+        
     </div>
   )}
 

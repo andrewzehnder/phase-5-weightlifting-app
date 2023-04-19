@@ -68,7 +68,6 @@ const Login = () => {
 
   return (
     <div>
-        <UserProvider>
             {/* try to use users now that I'm using context instead of showloginform */}
             {showLoginForm ? (
             <LoginForm setShowLoginForm={ setShowLoginForm } setUsername={ setUsername } setPassword= { setPassword } loginErrors= { loginErrors } handleSessionSubmit= { handleSessionSubmit } username={ username } password= { password }/>
@@ -76,7 +75,6 @@ const Login = () => {
             <SignupForm setShowLoginForm={ setShowLoginForm } handleSignupSubmit={ handleSignupSubmit } signupErrors= { signupErrors } setNewUser= { setNewUser } newUser= { newUser } setUsername= { setUsername } setPassword= { setPassword } />
             )
             }
-        </UserProvider>
     </div>
   )
 }

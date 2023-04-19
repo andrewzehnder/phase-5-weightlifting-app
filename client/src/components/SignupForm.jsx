@@ -1,12 +1,10 @@
 import React, { useContext } from 'react'
-import { UserContext } from "../context/user";
 import { useNavigate } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
 
 const SignupForm = ({ setShowLoginForm, handleSignupSubmit, signupErrors, setNewUser, newUser, setUsername, setPassword }) => {
-  const { user } = useContext(UserContext);
   const navigate = useNavigate(0);
 
   const handleChange = e => {
@@ -35,7 +33,7 @@ const SignupForm = ({ setShowLoginForm, handleSignupSubmit, signupErrors, setNew
       : null
     }
 
-    <Form>
+    <Form onSubmit={ handleSignupSubmit }>
         <Form.Group style={{ width: '33.33%', padding: '10px' }}>
         <h2>Create a New User</h2>
         <div>
@@ -83,15 +81,16 @@ const SignupForm = ({ setShowLoginForm, handleSignupSubmit, signupErrors, setNew
                 />
        </div>
 
-       <Button input type="submit" variant="light" onClick={ handleSignupSubmit } style={{ marginBottom: '20px' }} >Create</Button>
-
-        <h4>Already have an account? Login here</h4>
-        <div>
-        <Button type="submit" variant="light" onClick={ handleLogin }>Login</Button>
-        </div>
+       <Button type="submit" variant="light" style={{ marginBottom: '20px' }} >Create</Button>
 
     </Form.Group>
    </Form>
+
+   <h4>Already have an account? Login here</h4>
+        <div>
+        <Button type="submit" variant="light" onClick={ handleLogin }>Login</Button>
+        </div>
+        
    </div>
   )}
 
