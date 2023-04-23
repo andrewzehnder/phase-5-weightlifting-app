@@ -5,8 +5,12 @@ Rails.application.routes.draw do
   post "/user/create", to: "users#create"
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy"
+
   get "/lifts_all", to: "lifts#index"
+  post "lifts", to: "lifts#create"
+
   get "/workouts_all", to: "workouts#index"
+
   get "/programs_all", to: "programs#index"
 
 

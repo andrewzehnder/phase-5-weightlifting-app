@@ -13,7 +13,7 @@ const LoginForm = ({ setShowLoginForm, setUsername, setPassword, loginErrors, ha
   }
 
   return (
-    <div>
+    <>
 
     {loginErrors.length ?
       <Alert severity="error" key={loginErrors}>{loginErrors}</Alert>
@@ -21,30 +21,28 @@ const LoginForm = ({ setShowLoginForm, setUsername, setPassword, loginErrors, ha
     }
 
     <Form onSubmit={ handleSessionSubmit }>
-       <Form.Group style={{ width: '33.33%', padding: '10px' }}>
+       <Form.Group style={{ padding: '10px' }}>
        <h2>Login with an Existing Account</h2>
-       <div>
             <Form.Label>Username:</Form.Label>
                 <Form.Control
                     required
                     id="username"
                     type="text"
+                    name="username"
                     value={ username } 
                     onChange={(e) => setUsername(e.target.value)}
                 />
-       </div>
-
-       <div>
+  
             <Form.Label>Password:</Form.Label>
                 <Form.Control
                     required
                     id="password"
                     type="password"
+                    name="password"
                     value={ password } 
                     onChange={(e) => setPassword(e.target.value)}
                     style={{ marginBottom: '10px' }}
                 />
-       </div>
 
        <Button type="submit" variant="light" style={{ marginBottom: '20px' }} >Login</Button>
 
@@ -52,11 +50,9 @@ const LoginForm = ({ setShowLoginForm, setUsername, setPassword, loginErrors, ha
     </Form>
 
     <h4>Don't have an account? Sign up here</h4>
-        <div>
-        <Button type="submit" variant="light" onClick={ handleSignUp }>Signup</Button>
-        </div>
         
-    </div>
+        <Button type="submit" variant="light" onClick={ handleSignUp }>Signup</Button>
+    </>
   )}
 
 export default LoginForm

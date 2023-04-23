@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { UserProvider } from "./context/user";
@@ -15,6 +15,20 @@ import ProgramsAdd from './components/ProgramsAdd';
 
 
 function App() {
+  const [allLifts, setAllLifts] = useState([]);
+
+  useEffect(() => {
+      fetch("/lifts_all")
+      .then ((resp) => {
+        if (resp.ok) {
+            resp.json().then((lifts) => setAllLifts(lifts))
+        }
+  })}, []);
+
+  const handleAddLift = newLift => {
+    setAllLifts([...allLifts, newLift])
+  }
+
   return (
     <Router>
       <UserProvider>
@@ -25,7 +39,7 @@ function App() {
           <Route path="/workouts" element={<Workouts />} />
           <Route path="/programs" element={<Programs />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/addlift" element={<LiftsAdd />} />
+          <Route path="/addlift" element={<LiftsAdd handleAddLift={ handleAddLift }/>} />
           <Route path="/addworkout" element={<WorkoutsAdd />} />
           <Route path="/addprogram" element={<ProgramsAdd />} />
         </Routes>

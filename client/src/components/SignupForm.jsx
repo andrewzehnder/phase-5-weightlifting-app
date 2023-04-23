@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
@@ -26,7 +26,7 @@ const SignupForm = ({ setShowLoginForm, handleSignupSubmit, signupErrors, setNew
  }
 
   return (
-    <div>
+    <>
 
     {signupErrors.length ?
       <Alert severity="error" key={signupErrors}>{signupErrors}</Alert>
@@ -34,52 +34,48 @@ const SignupForm = ({ setShowLoginForm, handleSignupSubmit, signupErrors, setNew
     }
 
     <Form onSubmit={ handleSignupSubmit }>
-        <Form.Group style={{ width: '33.33%', padding: '10px' }}>
+        <Form.Group style={{ padding: '10px' }}>
         <h2>Create a New User</h2>
-        <div>
             <Form.Label>Name:</Form.Label>
                 <Form.Control
                     required
                     id="name"
                     type="text"
+                    name="name"
                     value={ newUser.name } 
                     onChange={ handleChange }
                 />
-       </div>
-
-       <div>
+  
             <Form.Label>Username:</Form.Label>
                 <Form.Control
                     required
                     id="username"
                     type="text"
+                    name="username"
                     value={ newUser.username } 
                     onChange={ handleChange }
                 />
-       </div>
-
-       <div>
+      
             <Form.Label>Password:</Form.Label>
                 <Form.Control
                     required
                     id="password"
                     type="password"
+                    name="password"
                     value={ newUser.password } 
                     onChange={ handleChange }
                 />
-       </div>
-
-       <div>
+      
             <Form.Label>Password Confirmation:</Form.Label>
                 <Form.Control
                     required
                     id="password_confirmation"
                     type="password"
+                    name="password_confirmation"
                     value={ newUser.password_confirmation } 
                     onChange={ handleChange }
                     style={{ marginBottom: '10px' }}
                 />
-       </div>
 
        <Button type="submit" variant="light" style={{ marginBottom: '20px' }} >Create</Button>
 
@@ -87,11 +83,10 @@ const SignupForm = ({ setShowLoginForm, handleSignupSubmit, signupErrors, setNew
    </Form>
 
    <h4>Already have an account? Login here</h4>
-        <div>
+
         <Button type="submit" variant="light" onClick={ handleLogin }>Login</Button>
-        </div>
         
-   </div>
+   </>
   )}
 
 export default SignupForm
