@@ -19,6 +19,8 @@ Rails.application.routes.draw do
 
   get "/workoutlifts/:id", to: "workouts_lifts#lifts_in_workout"
 
+  get "/programworkouts/:id", to: "programs_workouts#workouts_in_program"
+
 
   # Routing logic: fallback requests for React Router.
   # Leave this here to help deploy your app later!
