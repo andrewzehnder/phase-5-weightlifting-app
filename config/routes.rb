@@ -14,6 +14,10 @@ Rails.application.routes.draw do
   delete "/workout/:id", to: "workouts#destroy"
 
   get "/programs_all", to: "programs#index"
+  post "/programs", to: "programs#create"
+  delete "/program/:id", to: "programs#destroy"
+
+  get "/workoutlifts/:id", to: "workouts_lifts#lifts_in_workout"
 
 
   # Routing logic: fallback requests for React Router.

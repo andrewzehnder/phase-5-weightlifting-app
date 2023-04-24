@@ -10,11 +10,15 @@ class ProgramsController < ApplicationController
       def create
           program = Program.create(program_params)
           if program.valid?
-          render json: program, status: :created
+            params[:workouts].each do |workout_id|
+                workout = Workout.find(workout_id)
+                program_workout = ProgramsWorkout.create(program_id: program.id, workout_id: workout.id)
+            end 
+          render json: { program: program, workouts: program.workouts }, status: :created
           else
           render json: { errors: program.errors.full_messages }, status: :unprocessable_entity
-          end
-      end
+          end    
+    end
   
       def show
           program = Program.find(params[:id])
@@ -35,7 +39,7 @@ class ProgramsController < ApplicationController
   private
   
       def program_params
-          params.permit(:name)
+        params.require(:program).permit(:name, workouts: [])
       end
   
       def render_unprocessable_entity(invalid)

@@ -52,7 +52,8 @@ function App() {
   }
 
   const handleAddProgram = newProgram => {
-    setAllPrograms([...allPrograms, newProgram])
+    console.log(newProgram, newProgram.program)
+    setAllPrograms([...allPrograms, newProgram.program])
   }
 
   return (
@@ -67,7 +68,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/addlift" element={<LiftsAdd handleAddLift={ handleAddLift }/>} />
           <Route path="/addworkout" element={<WorkoutsAdd handleAddWorkout={  handleAddWorkout } allLifts={ allLifts } />} />
-          <Route path="/addprogram" element={<ProgramsAdd handleAddProgram= { handleAddProgram }/>} />
+          <Route path="/addprogram" element={<ProgramsAdd handleAddProgram= { handleAddProgram } allWorkouts={ allWorkouts }/>} />
         </Routes>
       </UserProvider>
     </Router>
