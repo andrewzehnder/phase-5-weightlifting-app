@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import Card from 'react-bootstrap/Card';
 
-const ProgramsCard = ({ program, user }) => {
+const ProgramsCard = ({ program }) => {
   const [associatedWorkouts, setassociatedWorkouts] = useState([]);
-  console.log("program_card", user)
     
     useEffect(() => {
         fetch(`/programworkouts/${program.id}`)

@@ -19,7 +19,7 @@ const Programs = ({ allPrograms }) => {
                 Add New Program
               </Button>
               {allPrograms.map(program => 
-                <ProgramsCard key={ program.id } program={ program } user={ user } />
+                <ProgramsCard key={ program.id } program={ program } />
               )}
             </>
           ) : (

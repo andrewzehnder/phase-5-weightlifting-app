@@ -46,7 +46,7 @@ const Login = () => {
 
   const handleSignupSubmit = e => {
     e.preventDefault();
-    fetch('/signup', {
+    fetch('/user/create', {
         method: "POST",
         headers: {
             "Accept": "application/json",
