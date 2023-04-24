@@ -1,6 +1,8 @@
 class WorkoutsController < ApplicationController
     rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
     rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
+
+    require 'date'
   
       def index
           workouts = Workout.all.order(:id)
@@ -34,6 +36,27 @@ class WorkoutsController < ApplicationController
       def destroy
           workout = Workout.find(params[:id])
           workout.destroy
+      end
+
+      def todays_workouts
+        day_of_week = Date.today.strftime('%A')
+      
+        user = User.find_by(id: session[:user_id])
+        user_programs = UsersProgram.where(user_id: user.id)
+        program_ids = user_programs.pluck(:program_id)
+        program_id = program_ids.first
+      
+        program_workouts = ProgramsWorkout.where(program_id: program_id)
+      
+        workouts = []
+        program_workouts.each do |pw|
+            workout = Workout.find_by(id: pw.workout_id)
+            if workout.day_of_the_week == day_of_week
+                workouts << workout
+            end
+        end
+
+        render json: workouts
       end
   
   private

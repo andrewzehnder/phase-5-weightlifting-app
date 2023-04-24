@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import Card from 'react-bootstrap/Card';
 
-const ProgramsCard = ({ program }) => {
-  const [associatedWorkouts, setassociatedWorkouts] = useState([])
+const ProgramsCard = ({ program, user }) => {
+  const [associatedWorkouts, setassociatedWorkouts] = useState([]);
+  console.log("program_card", user)
     
     useEffect(() => {
         fetch(`/programworkouts/${program.id}`)
@@ -11,6 +12,7 @@ const ProgramsCard = ({ program }) => {
               resp.json().then((workouts) => setassociatedWorkouts(workouts))
           }
       })}, []);
+
     return (
         <Card style={{ width: '18rem', marginBottom: '10px' }}>
         <Card.Header>{program.name}</Card.Header>

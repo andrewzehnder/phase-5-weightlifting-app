@@ -21,6 +21,8 @@ const NavBar = () => {
       }
     });
   }
+   
+  console.log("nav", user)
 
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
