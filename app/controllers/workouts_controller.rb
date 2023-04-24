@@ -10,7 +10,11 @@ class WorkoutsController < ApplicationController
       def create
           workout = Workout.create(workout_params)
           if workout.valid?
-          render json: workout, status: :created
+            params[:lifts].each do |lift_id|
+                lift = Lift.find(lift_id)
+                workout_lift = WorkoutsLift.create(workout_id: workout.id, lift_id: lift.id)
+            end 
+          render json: { workout: workout, lifts: workout.lifts }, status: :created
           else
           render json: { errors: workout.errors.full_messages }, status: :unprocessable_entity
           end
@@ -35,7 +39,7 @@ class WorkoutsController < ApplicationController
   private
   
       def workout_params
-          params.permit(:name, :day_of_the_week)
+          params.require(:workout).permit(:name, :day_of_the_week, lifts: [])
       end
   
       def render_unprocessable_entity(invalid)

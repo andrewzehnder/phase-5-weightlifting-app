@@ -16,6 +16,8 @@ import ProgramsAdd from './components/ProgramsAdd';
 
 function App() {
   const [allLifts, setAllLifts] = useState([]);
+  const [allWorkouts, setAllWorkouts] = useState([]);
+  const [allPrograms, setAllPrograms] = useState([]);
 
   useEffect(() => {
       fetch("/lifts_all")
@@ -25,8 +27,32 @@ function App() {
         }
   })}, []);
 
+  useEffect(() => {
+    fetch("/workouts_all")
+    .then ((resp) => {
+      if (resp.ok) {
+          resp.json().then((workouts) => setAllWorkouts(workouts))
+      }
+  })}, []);
+
+  useEffect(() => {
+    fetch("/programs_all")
+    .then ((resp) => {
+      if (resp.ok) {
+          resp.json().then((programs) => setAllPrograms(programs))
+      }
+  })}, []);
+
   const handleAddLift = newLift => {
     setAllLifts([...allLifts, newLift])
+  }
+
+  const handleAddWorkout = newWorkout => {
+    setAllWorkouts([...allWorkouts, newWorkout.workout])
+  }
+
+  const handleAddProgram = newProgram => {
+    setAllPrograms([...allPrograms, newProgram])
   }
 
   return (
@@ -35,13 +61,13 @@ function App() {
         <NavBar />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/lifts" element={<Lifts />} />
-          <Route path="/workouts" element={<Workouts />} />
-          <Route path="/programs" element={<Programs />} />
+          <Route path="/lifts" element={<Lifts allLifts={ allLifts } />} />
+          <Route path="/workouts" element={<Workouts allWorkouts={ allWorkouts }/>} />
+          <Route path="/programs" element={<Programs allPrograms={ allPrograms } />} />
           <Route path="/login" element={<Login />} />
           <Route path="/addlift" element={<LiftsAdd handleAddLift={ handleAddLift }/>} />
-          <Route path="/addworkout" element={<WorkoutsAdd />} />
-          <Route path="/addprogram" element={<ProgramsAdd />} />
+          <Route path="/addworkout" element={<WorkoutsAdd handleAddWorkout={  handleAddWorkout } allLifts={ allLifts } />} />
+          <Route path="/addprogram" element={<ProgramsAdd handleAddProgram= { handleAddProgram }/>} />
         </Routes>
       </UserProvider>
     </Router>
