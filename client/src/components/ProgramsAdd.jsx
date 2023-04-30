@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
@@ -7,7 +7,7 @@ const ProgramsAdd = ({ handleAddProgram, allWorkouts }) => {
   const [program, setProgram] = useState({
     name: ""
 })
-const [selectedWorkouts, setselectedWorkouts] = useState([]);
+const [selectedWorkouts, setSelectedWorkouts] = useState([]);
 const navigate = useNavigate(0);
 
 const handleSubmit = e => {
@@ -41,7 +41,7 @@ const handleWorkoutChange = e => {
     const isChecked = e.target.checked;
 
     if (isChecked) {
-      setselectedWorkouts([...selectedWorkouts, workoutId]);
+      setSelectedWorkouts([...selectedWorkouts, workoutId]);
     } else {
       selectedWorkouts(selectedWorkouts.filter(id => id !== workoutId));
     }

@@ -5,9 +5,8 @@ import Button from 'react-bootstrap/Button';
 import ProgramsCard from './ProgramsCard';
 
 
-const Programs = ({ allPrograms }) => {
+const Programs = ({ allPrograms, handleDeleteProgram }) => {
   const { user } = useContext(UserContext);
-  console.log("program", user)
 
   return (
     <Form>
@@ -15,11 +14,11 @@ const Programs = ({ allPrograms }) => {
         <ul>
           { user ? (
             <>
-              <Button type="submit" variant="outline-primary" href="/addprogram" style={{ marginTop: '20px', marginBottom: '10px', marginLeft: '30px' }}>
+              <Button type="submit" variant="outline-primary" href="/addprogram" style={{ marginTop: '20px', marginBottom: '10px' }}>
                 Add New Program
               </Button>
               {allPrograms.map(program => 
-                <ProgramsCard key={ program.id } program={ program } />
+                <ProgramsCard key={ program.id } program={ program } handleDeleteProgram={ handleDeleteProgram } />
               )}
             </>
           ) : (

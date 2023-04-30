@@ -16,13 +16,12 @@ const NavBar = () => {
       method: "DELETE" 
     }).then((resp) => {
       if (resp.ok) {
-        navigate ('/login');
+        console.log("logout set user")
         setUser(null);
+        navigate ('/login');
       }
     });
   }
-   
-  console.log("nav", user)
 
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -37,7 +36,7 @@ const NavBar = () => {
           </Nav>
           <Nav>
             { user ? 
-                <Button variant="outline-light" onClick={handleLogout} >Logout</Button> : 
+                <Button variant="outline-light" onClick={ handleLogout } >Logout</Button> : 
                 <Button variant="outline-light" href="/login">Login</Button>
             }
           </Nav>

@@ -14,6 +14,7 @@ function Home () {
 
     return (
         <>
+        <h2><u>Today's Workout</u></h2>
         { todaysWorkout.map(workout =>
             <Card style={{ width: '18rem', marginBottom: '10px' }} key={workout.id}>
             <Card.Header>{workout.name}</Card.Header>

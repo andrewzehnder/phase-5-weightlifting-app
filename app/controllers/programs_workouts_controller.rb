@@ -3,16 +3,15 @@ class ProgramsWorkoutsController < ApplicationController
     rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
 
     def workouts_in_program
-        program = ProgramsWorkout.where(program_id: params[:id])
-        program_ids = program.pluck(:id)
+        workouts = ProgramsWorkout.where(program_id: params[:id])
         associated_workouts = []
-        program_ids.each do |id|
-            workout = Workout.find(id)
-            label = "#{workout.name} - #{workout.day_of_the_week}"
-            associated_workouts << label
+        workouts.each do |program_workout|
+          workout = Workout.find(program_workout.workout_id)
+          label = "#{workout.name} - #{workout.day_of_the_week}"
+          associated_workouts << label
         end
         render json: associated_workouts
-    end
+      end
 
 private
 

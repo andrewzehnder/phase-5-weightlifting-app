@@ -32,6 +32,7 @@ const Login = () => {
      }).then ((resp) => {
       if (resp.ok) {
           resp.json().then(user => {
+            console.log("session submit")
             setUser(user);
             navigate ('/');
           })
@@ -56,6 +57,7 @@ const Login = () => {
     }).then ((resp) => {
       if (resp.ok) {
           resp.json().then(newUser => { 
+            console.log("signup submit")
             setUser(newUser);
             handleSessionSubmit(e);
           })

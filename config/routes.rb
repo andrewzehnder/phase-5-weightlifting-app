@@ -15,7 +15,9 @@ Rails.application.routes.draw do
   get "/todaysworkouts", to: "workouts#todays_workouts"
 
   get "/programs_all", to: "programs#index"
+  get "/program/:id", to: "programs#show"
   post "/programs", to: "programs#create"
+  patch "program/:id", to: "programs#update"
   delete "/program/:id", to: "programs#destroy"
 
   get "/workoutlifts/:id", to: "workouts_lifts#lifts_in_workout"

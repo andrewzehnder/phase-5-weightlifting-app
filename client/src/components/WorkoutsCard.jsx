@@ -17,7 +17,7 @@ const WorkoutsCard = ({ workout }) => {
     <Card style={{ width: '18rem', marginBottom: '10px' }}>
       <Card.Header>{workout.name}</Card.Header>
       <Card.Body>
-        <Card.Title className="mb-2 text-muted" >{workout.day_of_the_week}</Card.Title>
+        <Card.Title className="mb-2 text-muted underline" >{workout.day_of_the_week}</Card.Title>
         {associatedLifts.map(lift => 
         <Card.Text key={lift}>
         {lift}

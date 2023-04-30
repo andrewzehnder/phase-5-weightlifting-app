@@ -4,14 +4,14 @@ class WorkoutsLiftsController < ApplicationController
 
     def lifts_in_workout
         lifts = WorkoutsLift.where(workout_id: params[:id])
-        lift_ids = lifts.pluck(:id)
         associated_lifts = []
-        lift_ids.each do |id|
-            lift = Lift.find(id)
+        lifts.each do |workout_lift|
+            lift = Lift.find(workout_lift.lift_id)
             associated_lifts << lift.name
         end
         render json: associated_lifts
     end
+
 
 private
 
