@@ -1,27 +1,13 @@
-import React, { useState, useEffect } from "react";
-import Card from 'react-bootstrap/Card';
+import React from "react";
+import TodaysWorkout from "./TodaysWorkout";
 
-function Home () {
-    const [todaysWorkout, setTodaysWorkout] = useState([]);
-
-    useEffect(() => {
-        fetch("/todaysworkouts")
-        .then ((resp) => {
-          if (resp.ok) {
-              resp.json().then((workouts) => setTodaysWorkout(workouts))
-          }
-      })}, []);
+function Home ({ todaysWorkout }) {
 
     return (
         <>
         <h2><u>Today's Workout</u></h2>
-        { todaysWorkout.map(workout =>
-            <Card style={{ width: '18rem', marginBottom: '10px' }} key={workout.id}>
-            <Card.Header>{workout.name}</Card.Header>
-            <Card.Body>
-                <Card.Title className="mb-2 text-muted" >{workout.day_of_the_week}</Card.Title>
-            </Card.Body>
-            </Card>
+        { todaysWorkout.map(workout => 
+            <TodaysWorkout key={ workout.id } workout={ workout }/>
         )}
         </>
     )

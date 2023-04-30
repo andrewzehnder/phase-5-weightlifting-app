@@ -7,7 +7,7 @@ class WorkoutsLiftsController < ApplicationController
         associated_lifts = []
         lifts.each do |workout_lift|
             lift = Lift.find(workout_lift.lift_id)
-            associated_lifts << lift.name
+            associated_lifts << {id: lift.id, name: lift.name}
         end
         render json: associated_lifts
     end

@@ -18,8 +18,8 @@ function App() {
   const [allLifts, setAllLifts] = useState([]);
   const [allWorkouts, setAllWorkouts] = useState([]);
   const [allPrograms, setAllPrograms] = useState([]);
+  const [todaysWorkout, setTodaysWorkout] = useState([]);
   
-
   useEffect(() => {
       fetch("/lifts_all")
       .then ((resp) => {
@@ -41,6 +41,14 @@ function App() {
     .then ((resp) => {
       if (resp.ok) {
           resp.json().then((programs) => setAllPrograms(programs))
+      }
+  })}, []);
+
+  useEffect(() => {
+    fetch("/todaysworkouts")
+    .then ((resp) => {
+      if (resp.ok) {
+          resp.json().then((workouts) => setTodaysWorkout(workouts))
       }
   })}, []);
 
@@ -78,7 +86,7 @@ function App() {
       <UserProvider>
         <NavBar />
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home todaysWorkout={ todaysWorkout }/>} />
           <Route path="/lifts" element={<Lifts allLifts={ allLifts } />} />
           <Route path="/workouts" element={<Workouts allWorkouts={ allWorkouts }/>} />
           <Route path="/programs" element={<Programs allPrograms={ allPrograms } handleDeleteProgram={ handleDeleteProgram }/>} />

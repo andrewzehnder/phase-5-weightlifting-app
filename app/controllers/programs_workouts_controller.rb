@@ -13,6 +13,11 @@ class ProgramsWorkoutsController < ApplicationController
         render json: associated_workouts
       end
 
+    def destroy
+        program_workout = ProgramsWorkout.find(params[:id])
+        program_workout.destroy
+    end
+
 private
 
     def render_unprocessable_entity(invalid)

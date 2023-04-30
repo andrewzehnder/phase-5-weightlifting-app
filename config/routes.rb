@@ -20,9 +20,12 @@ Rails.application.routes.draw do
   patch "program/:id", to: "programs#update"
   delete "/program/:id", to: "programs#destroy"
 
+  get "/weight/:id", to: "weights#show"
+
   get "/workoutlifts/:id", to: "workouts_lifts#lifts_in_workout"
 
   get "/programworkouts/:id", to: "programs_workouts#workouts_in_program"
+  delete "/programworkouts/:id", to: "programs_workouts#destroy"
 
 
   # Routing logic: fallback requests for React Router.
