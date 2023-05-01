@@ -32,8 +32,10 @@ const WeightAdd = ({ lift, user }) => {
         fetch(`/calculate_one_rep_max?completed_weight=${completedWeight}&completed_reps=${completedReps}`)
         .then(resp => resp.json())
         .then(data => {
-            console.log(data);
-            setCompletedORM(data)
+            console.log(data, completedORM);
+            if (data > completedORM) {
+                setCompletedORM(data)
+            }
         })
     }
 
@@ -80,7 +82,7 @@ const WeightAdd = ({ lift, user }) => {
                 <Card.Title>{lift.name}</Card.Title>
             </div>
             <div className="col-6 text-end">
-                <Card.Text>One Rep Max: {liftInfo?.one_rep_max}</Card.Text>
+                <Card.Text>Best One Rep Max: {liftInfo?.one_rep_max}</Card.Text>
             </div>
             </div>
             <div className="row mb-2">
