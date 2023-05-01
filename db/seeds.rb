@@ -21,8 +21,8 @@
 # puts "🌱 Seeding..."
 
 # # Creating two users
-# user1 = User.create(name: "John", username: "johndoe", password_digest: BCrypt::Password.create('Password1'))
-# user2 = User.create(name: "Jane", username: "janedoe", password_digest: BCrypt::Password.create('Password1'))
+# user1 = User.create(name: "John", email_address: "chsbball232@yahoo.com", username: "johndoe", password_digest: BCrypt::Password.create('Password1'))
+# user2 = User.create(name: "Jane", email_address: "chsbball232@yahoo.com", username: "janedoe", password_digest: BCrypt::Password.create('Password1'))
 
 # # Create lifts
 # chest_lifts = [

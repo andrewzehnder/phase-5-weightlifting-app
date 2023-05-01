@@ -4,7 +4,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
 
-const SignupForm = ({ setShowLoginForm, handleSignupSubmit, signupErrors, setNewUser, newUser, setUsername, setPassword }) => {
+const SignupForm = ({ setShowLoginForm, handleSignupSubmit, signupErrors, setNewUser, newUser, setUsername, setPassword, setEmailAddress }) => {
   const navigate = useNavigate(0);
 
   const handleChange = e => {
@@ -18,6 +18,9 @@ const SignupForm = ({ setShowLoginForm, handleSignupSubmit, signupErrors, setNew
    else if (e.target.name === 'password') {
      setPassword(e.target.value);
    }
+   else if (e.target.name === 'email_address') {
+    setEmailAddress(e.target.value);
+  }
   }
  
   const handleLogin = e => {
@@ -43,6 +46,16 @@ const SignupForm = ({ setShowLoginForm, handleSignupSubmit, signupErrors, setNew
                     type="text"
                     name="name"
                     value={ newUser.name } 
+                    onChange={ handleChange }
+                />
+
+              <Form.Label>Email Address:</Form.Label>
+                <Form.Control
+                    required
+                    id="email_address"
+                    type="text"
+                    name="email_address"
+                    value={ newUser.email_address } 
                     onChange={ handleChange }
                 />
   

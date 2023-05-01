@@ -9,10 +9,12 @@ const Login = () => {
   const [showLoginForm, setShowLoginForm] = useState("true");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [emailAddress, setEmailAddress] = useState("")
   const [loginErrors, setLoginErrors] = useState([]);
   const [signupErrors, setSignupErrors] = useState([]);
   const [newUser, setNewUser] = useState({
     name: "",
+    email_address: "",
     username: "",
     password: "",
     password_confirmation: ""
@@ -39,6 +41,7 @@ const Login = () => {
       } 
       else {
           resp.json().then(error => {
+            console.log(error)
             setLoginErrors(error.error);
           });
       }
@@ -63,10 +66,14 @@ const Login = () => {
           })
         }
       else {
-          resp.json().then((error) => setSignupErrors(error.errors));
+          resp.json().then((error) => {
+            console.log(error)
+            setSignupErrors(error.error);
+        });
       }
     })
   }
+
 
   return (
     <div>
@@ -74,7 +81,7 @@ const Login = () => {
             {showLoginForm ? (
             <LoginForm setShowLoginForm={ setShowLoginForm } setUsername={ setUsername } setPassword= { setPassword } loginErrors= { loginErrors } handleSessionSubmit= { handleSessionSubmit } username={ username } password= { password }/>
             ) : (
-            <SignupForm setShowLoginForm={ setShowLoginForm } handleSignupSubmit={ handleSignupSubmit } signupErrors= { signupErrors } setNewUser= { setNewUser } newUser= { newUser } setUsername= { setUsername } setPassword= { setPassword } />
+            <SignupForm setShowLoginForm={ setShowLoginForm } handleSignupSubmit={ handleSignupSubmit } signupErrors= { signupErrors } setNewUser= { setNewUser } newUser= { newUser } setUsername= { setUsername } setPassword= { setPassword } setEmailAddress= { setEmailAddress } />
             )
             }
     </div>

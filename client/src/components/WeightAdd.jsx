@@ -6,10 +6,10 @@ import Button from 'react-bootstrap/Button';
 const WeightAdd = ({ lift, user }) => {
     const [lifts, setLifts] = useState([]);
     const [liftInfo, setLiftInfo] = useState([]);
-    const [completedSets, setCompletedSets] = useState(null);
-    const [completedReps, setCompletedReps] = useState(null);
-    const [completedWeight, setCompletedWeight] = useState(null);
-    const [completedORM, setCompletedORM] = useState(null);
+    const [completedSets, setCompletedSets] = useState("");
+    const [completedReps, setCompletedReps] = useState("");
+    const [completedWeight, setCompletedWeight] = useState("");
+    const [completedORM, setCompletedORM] = useState("");
     
     useEffect(() => {
         const liftInfoFirst = lifts ? lifts[0] : null;
@@ -58,9 +58,6 @@ const WeightAdd = ({ lift, user }) => {
               .then(resp => resp.json())
               .then(data => {
                 console.log(data);
-                setCompletedSets(null);
-                setCompletedReps(null);
-                setCompletedWeight(null);
                 setLiftInfo(data);
               });
           } else {
@@ -69,25 +66,11 @@ const WeightAdd = ({ lift, user }) => {
               .then(resp => resp.json())
               .then(data => {
                 console.log(data);
-                setCompletedSets(null);
-                setCompletedReps(null);
-                setCompletedWeight(null);
                 setLiftInfo(data);
               });
           }
         }
       }, [completedORM]);
-
-    // useEffect(() => {
-    //     setCompletedSets(null);
-    //     setCompletedReps(null);
-    //     setCompletedWeight(null);
-    //     setCompletedORM(null);
-    // }, [liftInfo]);
-
-
-      console.log("completedreps", completedReps)
-
 
     return (
     <Card style={{ marginBottom: '10px' }}>

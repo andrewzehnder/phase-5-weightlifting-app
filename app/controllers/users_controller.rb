@@ -8,11 +8,12 @@ class UsersController < ApplicationController
     end
   
     def create
-      user = User.create(user_params)
-      if user.valid?
-        render json: user, status: :created
+      @user = User.create(user_params)
+      if @user
+        WelcomeEmailMailer.with(user: @user).new_welcome_email.deliver_later
+        render json: @user, status: :created
       else
-        render json: { errors: user.errors.full_messages }, status: :unprocessable_entity
+        render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity
       end
     end
 
@@ -20,11 +21,16 @@ class UsersController < ApplicationController
       user = User.find_by(id: session[:user_id])
       render json: user, status: :created
     end
+
+    def destroy
+      user = User.find(params[:id])
+      user.destroy
+  end
     
     private
   
     def user_params
-      params.permit(:name, :username, :password, :password_confirmation)
+      params.permit(:name, :email_address, :username, :password, :password_confirmation)
     end
 
     def render_unprocessable_entity(invalid)
