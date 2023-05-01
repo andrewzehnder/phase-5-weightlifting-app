@@ -21,6 +21,9 @@ Rails.application.routes.draw do
   delete "/program/:id", to: "programs#destroy"
 
   get "/weight/:id", to: "weights#show"
+  get "/calculate_one_rep_max", to: "weights#calculate_one_rep_max"
+  post "/weight", to: "weights#create"
+  patch "/weight/:id", to: "weights#update"
 
   get "/workoutlifts/:id", to: "workouts_lifts#lifts_in_workout"
 

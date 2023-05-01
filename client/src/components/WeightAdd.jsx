@@ -4,44 +4,91 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
 const WeightAdd = ({ lift, user }) => {
-    const [lifts, setLifts] = useState(null)
-    const [completedSets, setCompletedSets] = useState()
-    const [completedReps, setCompletedReps] = useState()
-    const [completedWeight, setCompletedWeight] = useState()
-    const liftInfo = lifts ? lifts[0] : [];
+    const [lifts, setLifts] = useState([]);
+    const [liftInfo, setLiftInfo] = useState([]);
+    const [completedSets, setCompletedSets] = useState(null);
+    const [completedReps, setCompletedReps] = useState(null);
+    const [completedWeight, setCompletedWeight] = useState(null);
+    const [completedORM, setCompletedORM] = useState(null);
+    
+    useEffect(() => {
+        const liftInfoFirst = lifts ? lifts[0] : null;
+        const newLiftInfo = liftInfoFirst ? liftInfoFirst : (lifts ? [] : null);
+        setLiftInfo(newLiftInfo);
+    }, [lifts]);
 
     useEffect(() => {
         fetch(`/weight/${lift.id}`)
         .then ((resp) => {
           if (resp.ok) {
-              resp.json().then((lift) => setLifts(lift))
+              resp.json()
+              .then((lift) => setLifts(lift))
           }
-    })}, []);
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        fetch('/weight', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            lift_id: lift.id,
-            user_id: user.id,
-            last_number_of_sets: completedSets,
-            last_number_of_reps: completedReps,
-            last_number_of_weight: completedWeight
-          })
         })
+    }, []);
+
+    const handleSave = (e) => {
+        e.preventDefault();
+        fetch(`/calculate_one_rep_max?completed_weight=${completedWeight}&completed_reps=${completedReps}`)
         .then(resp => resp.json())
         .then(data => {
-            console.log(data)
+            console.log(data);
+            setCompletedORM(data)
         })
-      };
+    }
 
-      console.log(liftInfo, lift)
+    useEffect(() => {
+        if (completedORM) {
+          const requestData = {
+            method: '',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              lift_id: lift.id,
+              user_id: user.id,
+              one_rep_max: completedORM,
+              last_number_of_sets: completedSets,
+              last_number_of_reps: completedReps,
+              last_number_of_weight: completedWeight
+            })
+          }
+      
+          if (liftInfo.id) {
+            requestData.method = 'PATCH';
+            fetch(`/weight/${liftInfo.id}`, requestData)
+              .then(resp => resp.json())
+              .then(data => {
+                console.log(data);
+                setCompletedSets(null);
+                setCompletedReps(null);
+                setCompletedWeight(null);
+                setLiftInfo(data);
+              });
+          } else {
+            requestData.method = 'POST';
+            fetch('/weight', requestData)
+              .then(resp => resp.json())
+              .then(data => {
+                console.log(data);
+                setCompletedSets(null);
+                setCompletedReps(null);
+                setCompletedWeight(null);
+                setLiftInfo(data);
+              });
+          }
+        }
+      }, [completedORM]);
 
-  
+    // useEffect(() => {
+    //     setCompletedSets(null);
+    //     setCompletedReps(null);
+    //     setCompletedWeight(null);
+    //     setCompletedORM(null);
+    // }, [liftInfo]);
+
+
+      console.log("completedreps", completedReps)
+
+
     return (
     <Card style={{ marginBottom: '10px' }}>
         <Card.Body>
@@ -101,7 +148,7 @@ const WeightAdd = ({ lift, user }) => {
                 <Form.Control type="text" placeholder="Enter completed weight" value={completedWeight} onChange={(e) => setCompletedWeight(e.target.value)} />
             </div>
             </div>
-            <Button variant="primary" onClick={handleSubmit}>Submit</Button>
+            <Button variant="primary" onClick={ handleSave }>Submit</Button>
         </Card.Body>
     </Card>
 

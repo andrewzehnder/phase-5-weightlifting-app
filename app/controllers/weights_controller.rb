@@ -32,6 +32,14 @@ class WeightsController < ApplicationController
         weight = Weight.find(params[:id])
         weight.destroy
     end
+
+    def calculate_one_rep_max
+        completed_weight = params[:completed_weight].to_f
+        completed_reps = params[:completed_reps].to_f
+        one_rep_max_dec = completed_weight / ( 1.0278 - 0.0278 * completed_reps )
+        one_rep_max = one_rep_max_dec.round
+        render json: one_rep_max
+    end
   
   private
   

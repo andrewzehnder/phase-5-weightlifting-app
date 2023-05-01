@@ -19,6 +19,7 @@ function App() {
   const [allWorkouts, setAllWorkouts] = useState([]);
   const [allPrograms, setAllPrograms] = useState([]);
   const [todaysWorkout, setTodaysWorkout] = useState([]);
+
   
   useEffect(() => {
       fetch("/lifts_all")
@@ -86,7 +87,7 @@ function App() {
       <UserProvider>
         <NavBar />
         <Routes>
-          <Route path="/" element={<Home todaysWorkout={ todaysWorkout }/>} />
+          <Route path="/" element={<Home todaysWorkout={ todaysWorkout } />} />
           <Route path="/lifts" element={<Lifts allLifts={ allLifts } />} />
           <Route path="/workouts" element={<Workouts allWorkouts={ allWorkouts }/>} />
           <Route path="/programs" element={<Programs allPrograms={ allPrograms } handleDeleteProgram={ handleDeleteProgram }/>} />

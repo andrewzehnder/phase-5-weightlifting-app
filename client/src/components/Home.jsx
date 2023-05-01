@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 import TodaysWorkout from "./TodaysWorkout";
 
 function Home ({ todaysWorkout }) {
@@ -7,7 +7,7 @@ function Home ({ todaysWorkout }) {
         <>
         <h2><u>Today's Workout</u></h2>
         { todaysWorkout.map(workout => 
-            <TodaysWorkout key={ workout.id } workout={ workout }/>
+            <TodaysWorkout key={ workout.id } workout={ workout } />
         )}
         </>
     )
