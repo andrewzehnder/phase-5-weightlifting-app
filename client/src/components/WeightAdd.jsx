@@ -10,11 +10,13 @@ const WeightAdd = ({ lift, user }) => {
     const [completedReps, setCompletedReps] = useState("");
     const [completedWeight, setCompletedWeight] = useState("");
     const [completedORM, setCompletedORM] = useState("");
+    const [triggerUpdate, setTriggerUpdate] = useState("0");
     
     useEffect(() => {
         const liftInfoFirst = lifts ? lifts[0] : null;
         const newLiftInfo = liftInfoFirst ? liftInfoFirst : (lifts ? [] : null);
         setLiftInfo(newLiftInfo);
+        console.log("newLift", liftInfo)
     }, [lifts]);
 
     useEffect(() => {
@@ -22,7 +24,7 @@ const WeightAdd = ({ lift, user }) => {
         .then ((resp) => {
           if (resp.ok) {
               resp.json()
-              .then((lift) => setLifts(lift))
+              .then((liftWeights) => setLifts(liftWeights))
           }
         })
     }, []);
@@ -32,15 +34,24 @@ const WeightAdd = ({ lift, user }) => {
         fetch(`/calculate_one_rep_max?completed_weight=${completedWeight}&completed_reps=${completedReps}`)
         .then(resp => resp.json())
         .then(data => {
-            console.log(data, completedORM);
-            if (data > completedORM) {
-                setCompletedORM(data)
+            if (data > liftInfo.one_rep_max) {
+                setCompletedORM(data);
             }
-        })
+            else {
+                setCompletedORM(liftInfo.one_rep_max);
+                setTriggerUpdate(triggerUpdate + 1);
+            }
+            });
     }
 
     useEffect(() => {
         if (completedORM) {
+            setTriggerUpdate(triggerUpdate + 1);
+          }
+        }, [completedORM])
+
+    useEffect(() => {
+        if (triggerUpdate > 0) {
           const requestData = {
             method: '',
             headers: { 'Content-Type': 'application/json' },
@@ -53,7 +64,7 @@ const WeightAdd = ({ lift, user }) => {
               last_number_of_weight: completedWeight
             })
           }
-      
+          console.log("patch/post")
           if (liftInfo.id) {
             requestData.method = 'PATCH';
             fetch(`/weight/${liftInfo.id}`, requestData)
@@ -72,7 +83,8 @@ const WeightAdd = ({ lift, user }) => {
               });
           }
         }
-      }, [completedORM]);
+      }, [triggerUpdate]);
+
 
     return (
     <Card style={{ marginBottom: '10px' }}>

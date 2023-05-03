@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { UserProvider, UserContext } from "./context/user";
+import { UserContext } from "./context/user";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavBar from './components/NavBar';
 import Home from './components/Home';
@@ -18,6 +18,17 @@ function App() {
   const [allLifts, setAllLifts] = useState([]);
   const [allWorkouts, setAllWorkouts] = useState([]);
   const [allPrograms, setAllPrograms] = useState([]);
+  const [todaysWorkout, setTodaysWorkout] = useState([]);
+  const { user } = useContext(UserContext);
+
+
+  useEffect(() => {
+      fetch("/todaysworkouts")
+      .then ((resp) => {
+        if (resp.ok) {
+            resp.json().then((workouts) => setTodaysWorkout(workouts))
+        }
+    })}, [user]);
   
   useEffect(() => {
       fetch("/lifts_all")
@@ -82,10 +93,9 @@ function App() {
 
   return (
     <Router>
-      <UserProvider>
         <NavBar />
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home todaysWorkout={ todaysWorkout }/>} />
           <Route path="/lifts" element={<Lifts allLifts={ allLifts } />} />
           <Route path="/workouts" element={<Workouts allWorkouts={ allWorkouts }/>} />
           <Route path="/programs" element={<Programs allPrograms={ allPrograms } handleDeleteProgram={ handleDeleteProgram }/>} />
@@ -95,7 +105,6 @@ function App() {
           <Route path="/addprogram" element={<ProgramsAdd handleAddProgram= { handleAddProgram } allWorkouts={ allWorkouts } />} />
           <Route path="/program/:id" element={<ProgramsEdit allWorkouts={ allWorkouts } handleEditProgram={ handleEditProgram } />}/>
         </Routes>
-      </UserProvider>
     </Router>
   );
 }

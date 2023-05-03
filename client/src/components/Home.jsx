@@ -1,20 +1,7 @@
-import React, { useContext, useState, useEffect } from 'react'
+import React from 'react'
 import TodaysWorkout from "./TodaysWorkout";
-import { UserContext } from "../context/user";
 
-function Home () {
-    const [todaysWorkout, setTodaysWorkout] = useState([]);
-    const { user } = useContext(UserContext);
-
-
-    useEffect(() => {
-        fetch("/todaysworkouts")
-        .then ((resp) => {
-          if (resp.ok) {
-              resp.json().then((workouts) => setTodaysWorkout(workouts))
-          }
-      })}, [user]);
-
+function Home ({ todaysWorkout }) {
 
     return (
         <>

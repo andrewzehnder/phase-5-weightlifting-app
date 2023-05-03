@@ -4,7 +4,7 @@ class WeightsController < ApplicationController
   
     def index
         weights = Weight.all.order(:id)
-        render json: weight
+        render json: weights
     end
 
     def create

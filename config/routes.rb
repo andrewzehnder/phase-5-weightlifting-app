@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   patch "program/:id", to: "programs#update"
   delete "/program/:id", to: "programs#destroy"
 
+  get "/weights_all", to: "weights#index"
   get "/weight/:id", to: "weights#show"
   get "/calculate_one_rep_max", to: "weights#calculate_one_rep_max"
   post "/weight", to: "weights#create"
