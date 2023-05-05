@@ -39,26 +39,37 @@ class WorkoutsController < ApplicationController
           workout.destroy
       end
 
-      def todays_workouts
-        day_of_week = Date.today.strftime('%A')
+    #   def todays_workouts
+    #     day_of_week = Date.today.strftime('%A')
       
-        user = User.find_by(id: session[:user_id])
-        user_programs = UsersProgram.where(user_id: user.id)
-        program_ids = user_programs.pluck(:program_id)
-        program_id = program_ids.first
+    #     user = User.find_by(id: session[:user_id])
+    #     user_programs = UsersProgram.where(user_id: user.id)
+    #     program_ids = user_programs.pluck(:program_id)
+    #     program_id = program_ids.first
       
-        program_workouts = ProgramsWorkout.where(program_id: program_id)
+    #     program_workouts = ProgramsWorkout.where(program_id: program_id)
       
-        workouts = []
-        program_workouts.each do |pw|
-            workout = Workout.find_by(id: pw.workout_id)
-            if workout.day_of_the_week == day_of_week
-                workouts << workout
-            end
-        end
+    #     workouts = []
+    #     program_workouts.each do |pw|
+    #         workout = Workout.find_by(id: pw.workout_id)
+    #         if workout.day_of_the_week == day_of_week
+    #             workouts << workout
+    #         end
+    #     end
 
-        render json: workouts
+    #     render json: workouts
+    #   end
+
+    def todays_workouts
+        day_of_week = Date.today.strftime('%A')
+        
+        user = User.find_by(id: session[:user_id])
+        program_workouts = ProgramsWorkout.where(program_id: user.users_programs.pluck(:program_id), workout_id: Workout.where(day_of_the_week: day_of_week).pluck(:id)).joins(:workout).order('workouts.id')
+        
+        render json: program_workouts.first.workout
       end
+      
+      
   
   private
   

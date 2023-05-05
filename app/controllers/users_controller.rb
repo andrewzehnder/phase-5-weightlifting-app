@@ -9,7 +9,7 @@ class UsersController < ApplicationController
   
     def create
       @user = User.create(user_params)
-      if @user
+      if @user.valid?
         WelcomeEmailMailer.with(user: @user).new_welcome_email.deliver_later
         render json: @user, status: :created
       else

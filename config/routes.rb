@@ -33,6 +33,8 @@ Rails.application.routes.draw do
   get "/programworkouts/:id", to: "programs_workouts#workouts_in_program"
   delete "/programworkouts/:id", to: "programs_workouts#destroy"
 
+  get "/user_programs", to: "users_programs#programs"
+
 
   # Routing logic: fallback requests for React Router.
   # Leave this here to help deploy your app later!

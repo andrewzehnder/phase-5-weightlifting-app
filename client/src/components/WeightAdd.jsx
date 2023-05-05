@@ -16,7 +16,6 @@ const WeightAdd = ({ lift, user }) => {
         const liftInfoFirst = lifts ? lifts[0] : null;
         const newLiftInfo = liftInfoFirst ? liftInfoFirst : (lifts ? [] : null);
         setLiftInfo(newLiftInfo);
-        console.log("newLift", liftInfo)
     }, [lifts]);
 
     useEffect(() => {
@@ -34,11 +33,13 @@ const WeightAdd = ({ lift, user }) => {
         fetch(`/calculate_one_rep_max?completed_weight=${completedWeight}&completed_reps=${completedReps}`)
         .then(resp => resp.json())
         .then(data => {
-            if (data > liftInfo.one_rep_max) {
+            if (data > (liftInfo.one_rep_max || 0)) {
                 setCompletedORM(data);
+                console.log("data", data)
             }
             else {
                 setCompletedORM(liftInfo.one_rep_max);
+                console.log("oldORM", liftInfo.one_rep_max)
                 setTriggerUpdate(triggerUpdate + 1);
             }
             });

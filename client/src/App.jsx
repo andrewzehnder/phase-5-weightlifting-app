@@ -26,9 +26,10 @@ function App() {
       fetch("/todaysworkouts")
       .then ((resp) => {
         if (resp.ok) {
-            resp.json().then((workouts) => setTodaysWorkout(workouts))
+            resp.json().then((workouts) => {setTodaysWorkout(workouts)
+            })
         }
-    })}, [user]);
+    })}, [user, allPrograms]);
   
   useEffect(() => {
       fetch("/lifts_all")
@@ -88,8 +89,8 @@ function App() {
     setAllPrograms((programsList) => 
       programsList.filter((program) => program.id !== deletedProgram.id)
   )}
-  
-  
+
+  console.log(todaysWorkout)
 
   return (
     <Router>

@@ -68,7 +68,7 @@ const Login = () => {
       else {
           resp.json().then((error) => {
             console.log(error)
-            setSignupErrors(error.error);
+            setSignupErrors(error.errors);
         });
       }
     })
