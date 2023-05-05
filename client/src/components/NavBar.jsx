@@ -30,7 +30,9 @@ const NavBar = () => {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
+          { user ? 
           <Nav.Link href="/programs">My Programs</Nav.Link>
+          : null }
           <Nav.Link href="/workouts">Workouts</Nav.Link>
           <Nav.Link href="/lifts">Lifts</Nav.Link>
           </Nav>
