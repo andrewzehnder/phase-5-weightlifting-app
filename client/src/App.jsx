@@ -28,11 +28,9 @@ function App() {
         if (resp.ok) {
           resp.json().then((workouts) => {
             setTodaysWorkout(workouts);
-            console.log(workouts, "workouts");
           });
         } else {
           setTodaysWorkout("");
-          console.log("cleared", todaysWorkout)
         }
       });
   }, [user, allPrograms]);
@@ -96,8 +94,6 @@ function App() {
     setAllPrograms((programsList) => 
       programsList.filter((program) => program.id !== deletedProgram.id)
   )}
-
-  console.log(todaysWorkout)
 
   return (
     <Router>
