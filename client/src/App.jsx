@@ -23,13 +23,20 @@ function App() {
 
 
   useEffect(() => {
-      fetch("/todaysworkouts")
-      .then ((resp) => {
+    fetch("/todaysworkouts")
+      .then((resp) => {
         if (resp.ok) {
-            resp.json().then((workouts) => {setTodaysWorkout(workouts)
-            })
+          resp.json().then((workouts) => {
+            setTodaysWorkout(workouts);
+            console.log(workouts, "workouts");
+          });
+        } else {
+          setTodaysWorkout("");
+          console.log("cleared", todaysWorkout)
         }
-    })}, [user, allPrograms]);
+      });
+  }, [user, allPrograms]);
+  
   
   useEffect(() => {
       fetch("/lifts_all")
